@@ -9,6 +9,7 @@
     <!--<script src="{{ url_for('static', path='/js/fetch.js') }}"></script>-->
     
     <link rel="stylesheet" href="../static/css/main.css">
+    <script src="../static/js/fetch.js"></script>
     <link rel="icon" type="image/png" href="https://img2.pngio.com/black-x-png-35414-free-icons-and-png-backgrounds-black-x-png-420_420.png"/>
 
     
@@ -55,40 +56,6 @@
             </form>
             <main class="grid"></main>
         </div>
-
-
-    <script>
-        function fetchData(){
-            fetch('/memes')
-            .then(response =>{
-                if(!response.ok){
-                    throw Error("ERROR");
-                }
-                return response.json();
-            }).then(data =>{
-                console.log(data)
-                const html = data.map(user =>{
-                    return `
-                    <article>
-                        <div class="text">
-                            <h6><strong>Created by: </strong>${user.name}</h6>
-                            <p>${user.caption}</p>
-                        </div>
-                        <div style="text-align: right;">
-                            <a href="" class="mb-4 text" data-toggle="modal" data-target="#modalContactForm"><button onClick="reply_click(${user.id})">Edit</button></a>
-                        </div>
-                        <img src="${user.url}" onerror="this.src='${'https://memegenerator.net/img/instances/58602367.jpg'}';" />
-                    </article>
-                    `;
-                }).join('');
-                document.querySelector('.grid').insertAdjacentHTML("afterbegin", html);
-            }).catch(error =>{
-                console.log(error);
-            })
-        }
-        fetchData();
-    </script>
-
 
 
     <script>
