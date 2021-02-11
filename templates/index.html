@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XMEME</title>
+    
+    <link rel="stylesheet" href="../static/css/main.css">
+    <script src="../static/js/fetch.js"></script>
+    
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+
+<body class="bg1">
+    <h2 style="margin-bottom: 0px;"> MEME STREAM</h2>
+        <div class="container-contact100">
+            <form class="main-form needs-validation" novalidate>
+                <div class="wrap-input100 bg1">
+                    <span class="label-input100"><strong>MEME OWNER*</strong></span>
+                    <input class="input100" type="text" id="name" name="name" placeholder="Enter Your Name" required>
+                    <div class="invalid-feedback">Enter your Name</div>
+                </div>
+
+                <div class="wrap-input100 bg1">
+                    <span class="label-input100"><strong>Caption *</strong></span>
+                    <input class="input100" type="text" id="caption" name="caption" placeholder="Enter Caption" required>
+                <div class="invalid-feedback">Enter Caption</div>
+                </div>
+
+                <div class="wrap-input100 bg1">
+                    <span class="label-input100"><strong>MEME URL *</strong></span>
+                    <input class="input100" type="text" id="url" name="url" placeholder="Enter MEME URL" required>
+                    <div class="invalid-feedback">Enter URL</div>
+                </div>
+
+                <div style="text-align: center;">
+                <button style="text-align: center;background-color: #faae2b;" type="submit" class="btn" id="btn"><strong>Submit MEME</strong></button>
+                </div>
+                <br>
+            </form>
+            <main class="grid"></main>
+        </div>
+
+
+
+    <script>
+        var form = document.querySelector('.needs-validation');
+    
+        form.addEventListener('submit', function(event) {
+            if(form.checkValidity() === true){
+                event.preventDefault();  //to stop the form submitting
+                let meme = {
+                    name: document.getElementById('name').value,
+                    caption: document.getElementById('caption').value,
+                    url: document.getElementById('url').value
+            }
+            // to clear the form for the next entries
+            document.querySelector('form').reset();
+
+            //for display purposes only
+            console.log(JSON.stringify(meme));
+
+            // JSON Object
+            fetch('/memes', {
+                method: 'POST',
+                redirect: 'follow',
+                body: JSON.stringify(meme),
+                headers: {
+                    'Content-type': 'application/json'
+                }
+            }).then(response => {
+                window.location = '/';
+                }).catch(function(err) {
+                    console.info(err + " url: " + url);
+                });
+        
+        }
+            else{
+                event.preventDefault();
+                event.stopPropagation();
+                form.classList.add('was-validated');
+            }
+            
+        })
+    </script>
+
+    <form class="patch">
+    <div class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header text-center">
+            <h5 class="modal-title w-100 font-weight-bold">Edit Meme</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body mx-3">
+            <div class="md-form wrap-input100 bg1">
+                <span class="label-input100"><strong>Caption</strong></span>
+                <input class="input100" type="text" id="caption2" name="caption2" placeholder="Enter Caption">
+                <div class="invalid-feedback">Enter Caption</div>
+            </div>
+
+            <div class="md-form wrap-input100 bg1">
+                <span class="label-input100"><strong>MEME URL</strong></span>
+                <input class="input100" type="text" id="url2" name="url2" placeholder="Enter MEME URL">
+                <div class="invalid-feedback">Enter URL</div>
+            </div>
+        </div>
+        <div class="modal-footer d-flex justify-content-center bg1">
+            <button type="submit" class="btn btn-primary pat">Send</button>
+        </div>
+        </div>
+    </div>
+    </div>
+    </form>
+
+
+    <script>
+
+        function reply_click(val){
+            id = val;
+        
+        var form2 = document.querySelector('.patch')
+
+        form2.addEventListener('submit', function(event) {
+            event.preventDefault();  //to stop the form submitting
+            let updated_meme = {
+                caption: document.getElementById('caption2').value,
+                url: document.getElementById('url2').value
+            }
+            // to clear the form for the next entries
+            document.querySelector('form').reset();
+
+            //for display purposes only
+            console.log(id);
+            console.log(JSON.stringify(updated_meme));
+
+            // JSON Object
+            route = '/memes/'+id.toString()
+            console.log(route)
+            fetch(route, {
+                method: 'PATCH',
+                redirect: 'follow',
+                body: JSON.stringify(updated_meme),
+                headers: {
+                    'Content-type': 'application/json'
+                }
+            }).then(response => {
+                window.location = '/';
+                }).catch(function(err) {
+                    console.info(err + " url: " + url);
+                });
+        
+        })
+    }
+    </script>
+
+
+</body>
+</html>

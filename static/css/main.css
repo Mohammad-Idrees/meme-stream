@@ -1,0 +1,152 @@
+
+
+h2{
+    padding-top: 30px;
+    padding-bottom: 20px;
+    background-color: #f2f7f5;
+    text-align: center;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+}
+
+h5{
+    font-family:Georgia, 'Times New Roman', Times, serif;
+}
+
+.main-form{
+    width: 70%;
+    margin: auto;
+}
+
+.bg1 {
+    background-color:#f2f7f5;
+}
+
+.container-contact100 {
+    width: 100%;  
+    min-height: 100vh;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    background:#f2f7f5;
+    
+}
+
+.label-input100 {
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 10px;
+    color: #393939;
+    line-height: 1.5;
+    text-transform: uppercase;
+}
+
+input {
+	outline: none;
+	border: none;
+}
+
+.input100 {
+    display: block;
+    width: 100%;
+    background: transparent;
+    font-family: Montserrat-SemiBold;
+    font-size: 18px;
+    color: #555555;
+    line-height: 1.2;
+    padding-right: 15px;
+    border: transparent;
+}
+
+.wrap-input100 {
+    width: 100%;
+    background-color: #fffffe;
+    position: relative;
+    border: 1px solid #e6e6e6;
+    border-radius: 13px;
+    padding: 10px 10px 9px 10px;
+    margin-bottom: 20px;
+}
+
+
+.wrap-contact100 {
+    width: 650px;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 62px 55px 90px 55px;
+}
+
+
+.grid {
+    height: 275px;
+    width: 90%;
+    margin: 30px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+    align-items: stretch;
+}
+
+.grid > article {
+    width: 90%;
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 2px 2px 6px 0px  rgba(0,0,0,0.3);
+    border-radius: 3px;
+    text-align: center;
+}
+
+.grid > article:hover{
+    transition: transform .1s ease-out;
+    transform: translateY(5px);
+}
+
+.grid > article img {
+    height: 250px;
+    width: 100%;
+    padding-top: 15px;
+}
+
+.text {
+    padding-top: 10px;
+    padding-left: 15px;
+    text-align:left;
+}
+    
+    
+    
+    .text > button {
+        margin-right: 10px;
+        background: #faae2b;
+        border-radius: 3px;
+        border: 0;
+        padding: 4px;
+        width: 20%;
+        font-weight: 600;
+        text-shadow: 2px 2px 6px 0px  rgba(0,0,0,0.3);
+    }
+    
+    
+    @media (max-width: 768px){
+        .grid{
+        grid-template-columns: repeat(2, 1fr);
+        margin: 0;
+        }
+    }
+    
+    @media (max-width: 500px){
+        .grid{
+        grid-template-columns: repeat(1, 1fr);
+        margin: 0;
+        }
+    
+        .grid > article{
+        text-align: center;
+        }
+    }
+
