@@ -52,15 +52,15 @@ class datain(BaseModel):
     caption : str 
     url : str 
 
-class dataout(BaseModel):
+class dataout(datain):
     id : str
-    name : str
-    caption : str
-    url : str
 
 class datapatch(BaseModel):
     caption: Optional[str] = None
     url: Optional[str] = None
+
+    class Config:
+        orm_mode = True
 
 @app.get('/', response_class=HTMLResponse)
 async def index(request: Request):
