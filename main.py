@@ -2,7 +2,7 @@ import databases
 import sqlalchemy
 from sqlalchemy import desc
 
-env = "prod"
+env = "dev"
 
 if env=="dev":
     DATABASE_URL = "postgresql://postgres:1234@localhost/xmeme"
@@ -28,14 +28,20 @@ engine = sqlalchemy.create_engine(
 metadata.create_all(engine)
 
 from fastapi import FastAPI, Request, HTTPException
-from fastapi.responses import HTMLResponse
+from fastapi.openapi.docs import (
+    get_redoc_html,
+    get_swagger_ui_html,
+    get_swagger_ui_oauth2_redirect_html,
+)
 from fastapi.staticfiles import StaticFiles
+from fastapi.openapi.utils import get_openapi
+from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
 
 from typing import List, Optional
 
-app = FastAPI()
+app = FastAPI(docs_url=None)
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
@@ -113,3 +119,37 @@ async def update_meme(id: int, d: datapatch):
     query = table.select().where(table.c.id == id)
     row = await database.fetch_one(query)
     return {**row}
+
+def custom_openapi():
+    if app.openapi_schema:
+        return app.openapi_schema
+    openapi_schema = get_openapi(
+        title="XMEME",
+        version="2.5.0",
+        description="Custom OpenAPI SWAGGER",
+        routes=app.routes,
+    )
+    openapi_schema["info"]["x-logo"] = {
+        "url": "https://freepngimg.com/download/internet_meme/19-2-meme-transparent-png.png"
+    }
+    app.openapi_schema = openapi_schema
+    return app.openapi_schema
+
+
+app.openapi = custom_openapi
+
+
+@app.get("/swagger-ui/", include_in_schema=False)
+async def custom_swagger_ui_html():
+    return get_swagger_ui_html(
+        openapi_url=app.openapi_url,
+        title= "XMEME" + " - Swagger UI",
+        oauth2_redirect_url=app.swagger_ui_oauth2_redirect_url,
+        swagger_js_url="/static/js/swagger-ui.js",
+        swagger_css_url="/static/css/swagger-ui.css",
+    )
+
+
+@app.get(app.swagger_ui_oauth2_redirect_url, include_in_schema=False)
+async def swagger_ui_redirect():
+    return get_swagger_ui_oauth2_redirect_html()
