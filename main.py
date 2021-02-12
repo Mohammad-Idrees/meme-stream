@@ -52,8 +52,11 @@ class datain(BaseModel):
     caption : str 
     url : str 
 
-class dataout(datain):
+class dataout(BaseModel):
     id : str
+    name : str
+    caption : str 
+    url : str 
 
 class datapatch(BaseModel):
     caption: Optional[str] = None
