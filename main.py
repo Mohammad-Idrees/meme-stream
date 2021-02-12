@@ -86,8 +86,14 @@ async def add_meme(d: datain):
     return {"id": str(record_id)}
 
 @app.get('/memes', response_model=List[dataout])
-async def get_memes():
+async def latest100():
     query = table.select().order_by(desc(table.c.id)).limit(100)
+    get_all = await database.fetch_all(query)
+    return get_all
+
+@app.get('/data', response_model=List[dataout])
+async def complete_database():
+    query = table.select().order_by(desc(table.c.id))
     get_all = await database.fetch_all(query)
     return get_all
 
