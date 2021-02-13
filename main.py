@@ -7,7 +7,7 @@ env = ""
 if env == "prod":
     DATABASE_URL = "postgres://jdrtjodvlpqwzb:dfa206764cb5a8c5f7358f5ae86b1d42d77626fef59a335838d3ba8849b1bf45@ec2-52-7-168-69.compute-1.amazonaws.com:5432/d561hj4baemcv6"
 else:
-    DATABASE_URL = "postgresql://us:password@localhost/data"
+    DATABASE_URL = "postgresql://xmemeadmin:pass@localhost/xmeme"
 
 metadata = sqlalchemy.MetaData()
 database = databases.Database(DATABASE_URL)
