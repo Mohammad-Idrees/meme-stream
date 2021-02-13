@@ -1,3 +1,5 @@
+sudo su - postgres
+sudo service postgresql restart
 sudo -u postgres createuser xmemeadmin
 sudo -u postgres createdb xmeme
 sudo -u postgres psql -c "alter user xmemeadmin with encrypted password 'pass';"
