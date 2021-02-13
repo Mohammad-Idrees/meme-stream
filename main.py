@@ -2,12 +2,12 @@ import databases
 import sqlalchemy
 from sqlalchemy import desc
 
-env = "dev"
+env = ""
 
-if env=="dev":
-    DATABASE_URL = "postgresql://postgres:1234@localhost/xmeme"
-else:
+if env == "prod":
     DATABASE_URL = "postgres://jdrtjodvlpqwzb:dfa206764cb5a8c5f7358f5ae86b1d42d77626fef59a335838d3ba8849b1bf45@ec2-52-7-168-69.compute-1.amazonaws.com:5432/d561hj4baemcv6"
+else:
+    DATABASE_URL = "postgresql://postgres:1234@localhost/xmeme"
 
 metadata = sqlalchemy.MetaData()
 database = databases.Database(DATABASE_URL)
