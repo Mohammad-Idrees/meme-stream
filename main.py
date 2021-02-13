@@ -2,7 +2,7 @@ import databases
 import sqlalchemy
 from sqlalchemy import desc
 
-env = "prod"
+env = "dev"
 
 if env=="dev":
     DATABASE_URL = "postgresql://postgres:1234@localhost/xmeme"
