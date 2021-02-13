@@ -1,4 +1,3 @@
-sudo su - postgres
 sudo service postgresql restart
 sudo -u postgres createuser xmemeadmin
 sudo -u postgres createdb xmeme
