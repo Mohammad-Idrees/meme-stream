@@ -1,45 +1,18 @@
-# XMEME
+## XMEME - MEME STREAM
+[Click Here](https://xmeme-idrees.herokuapp.com/) To view the website
 
-[XMEME-APP](https://xmeme-idrees.herokuapp.com/)
+You can post meme on this website and enjoy others memes. All you need to do is enter name, caption for meme and url for the meme.
 
-## main.py 
-- main.py contains the database connection and the API routes
+Tech Stack Used
+- **HTML/CSS/JS** and **Bootstrap** for frontend.
+- **FASTAPI/Python** for backend.
+- **Postgresql** for database.
 
-## Static
-- CSS/JS files used for frontend
-
-## Templates
-- Home page - index.html 
-
-## Procfile
-- needed for heroku deployment
-
-## requirements.txt
-- requirements.txt has all the necessary libraries and their versions to run main.py
-
-## runtime.txt
-- has the required python version
-
-## install.sh
-- automated script to install all the necessary dependencies
-
-## server_run.sh
-- commands to  to get your backend server up and running.
-
-## sleep.sh
-- Specify the number of seconds you would like to wait (before the curl commands are run)
-
-## test_server.sh
-- script which is used for testing server with curl commands
+### About
+- The website works on REST-API architecture
+- The data is sent to the endpoint using javascript fetch call
+- Implemented custom swagger-ui using fastapi.
+- [Check Out](https://xmeme-idrees.herokuapp.com/swagger-ui/) the swagger-ui.
 
 
-## For running on local server follow below commands
-```
-git clone https://gitlab.crio.do/COHORT_ME_BUILDOUT_XMEME_ENROLL_1612436694845/idreesmohammad976-me_buildout_xmeme.git
-cd idreesmohammad976-me_buildout_xmeme
-chmod +x install.sh
-sudo ./install.sh
-chmod +x server_run.sh
-sudo ./server_run.sh
-```
 
